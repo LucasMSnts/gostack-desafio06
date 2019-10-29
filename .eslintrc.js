@@ -33,6 +33,8 @@ module.exports = {
           }
       ],
       'import/prefer-default-export': 'off',
-      'react/state-in-constructor': 'off'
+      'react/state-in-constructor': 'off',
+      'react/static-property-placement': 'off',
+      'react/sort-comp': 'off'
   },
 };
