@@ -32,6 +32,7 @@ export default class User extends Component {
         stars: [],
         loading: true,
         page: 1,
+        refreshing: false,
     };
 
     async componentDidMount() {
@@ -51,6 +52,7 @@ export default class User extends Component {
             stars: [...stars, ...response.data],
             loading: false,
             page,
+            refreshing: false,
         });
     };
 
@@ -62,9 +64,18 @@ export default class User extends Component {
         this.load(nextPage);
     };
 
+    refreshList = async () => {
+        await this.setState({
+            refreshing: true,
+            stars: [],
+        })
+
+        this.load();
+    };
+
     render() {
         const { navigation } = this.props;
-        const { stars, loading } = this.state;
+        const { stars, loading, refreshing } = this.state;
 
         const user = navigation.getParam('user');
 
@@ -83,6 +94,8 @@ export default class User extends Component {
                     data={stars}
                     onEndReachedThreshold={0.2} // Carrega mais itens quando chegar em 20% do fim
                     onEndReached={this.loadMore} // Função que carrega mais itens
+                    onRefresh={this.refreshList} // Função dispara quando o usuário arrasta a lista pra baixo
+                    refreshing={refreshing} // Variável que armazena um estado true/false que representa se a lista está atualizando
                     keyExtractor={star => String(star.id)}
                     renderItem={({ item }) => (
                         <Starred>
