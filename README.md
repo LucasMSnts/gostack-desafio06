@@ -1,6 +1,6 @@
 # gostack-desafio06
 
-Projeto com React Native que mostra os repositórios marcados como favorito do usuário 
+Projeto com React Native que mostra os repositórios marcados como favoritos dos usuários 
 
 ## Desafios
 Criar funcionalidades:
